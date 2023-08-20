@@ -4,7 +4,7 @@ const BadRequestError = require('../errors/bad-request-error');
 const ForbiddenError = require('../errors/forbidden-error');
 
 // возвращает все фильмы
-module.exports.getMovies = (request, response, next) => Movie.find({})
+module.exports.getMovies = (request, response, next) => movieSchema.find({})
   .then((movies) => response.status(200).send({ data: movies }))
   .catch(next);
 
@@ -13,7 +13,7 @@ module.exports.deleteMovie = (request, response, next) => {
   const { id } = request.params;
   // console.log(request.params);
   // console.log(request.user._id);
-  Movie.findById(id)
+  movieSchema.findById(id)
     .orFail(() => new NotFoundError(`Фильм с id ${id} не найден`))
     .then((movie) => {
       if (!movie.owner.equals(request.user._id)) {
