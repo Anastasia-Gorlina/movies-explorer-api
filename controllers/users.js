@@ -20,7 +20,7 @@ module.exports.createUser = (request, response, next) => {
     .then((hash) => User.create({
       name, email, password: hash,
     })) // создадим пользователя на основе пришедших данных
-    .then((user) => response.status(201).send(user))
+    .then((user) => response.status(201).send({'name': user['name'], 'email': user['email']}))
     .catch((error) => {
       // console.log(error.name);
       if (error.name === 'ValidationError') {
@@ -50,7 +50,7 @@ module.exports.login = (request, response, next) => {
           secure: true,
           sameSite: 'none', // <-- Выключаем данную опцию
         })
-        .send({ data: user.toJSON() });
+        .send({'name': user['name'], 'email': user['email']});
     })
     .catch(next);
 };

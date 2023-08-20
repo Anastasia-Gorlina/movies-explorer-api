@@ -3,10 +3,18 @@ const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const ForbiddenError = require('../errors/forbidden-error');
 
-// возвращает все фильмы
-module.exports.getMovies = (request, response, next) => movieSchema.find({})
-  .then((movies) => response.status(200).send({ data: movies }))
-  .catch(next);
+module.exports.getMovies = (request, response, next) => {
+  const owner = request.user._id;
+
+  movieSchema.find({ owner })
+    .then((cards) => {
+      response.status(200).send(cards);
+    })
+    .catch((err) => {
+      throw new NotFoundError(err.message);
+    })
+    .catch(next);
+};
 
 // удаляет фильм по _id
 module.exports.deleteMovie = (request, response, next) => {

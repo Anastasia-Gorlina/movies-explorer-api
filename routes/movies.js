@@ -26,7 +26,7 @@ router.post(
       image: Joi.string().required().custom(validateURL, 'custom validation'),
       trailerLink: Joi.string().required().custom(validateURL, 'custom validation'),
       thumbnail: Joi.string().required().custom(validateURL, 'custom validation'),
-      movieId: Joi.required(),
+      movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),
@@ -39,7 +39,7 @@ router.delete(
   // валидация
   celebrate({
     params: Joi.object().keys({
-      movieId: Joi.string().required().length(24).hex(),
+      id: Joi.string().hex().length(24),
     }),
   }),
   deleteMovie,
