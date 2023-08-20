@@ -43,10 +43,10 @@ module.exports.createMovie = (request, response, next) => {
     image,
     trailerLink,
     thumbnail,
+    owner,
     movieId,
     nameRU,
     nameEN,
-    owner,
   }) // создадим фильм на основе пришедших данных
     .then((movie) => response.status(201).send({ data: movie })) // вернём записанные в базу данные
     .catch((error) => {
