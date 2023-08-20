@@ -1,5 +1,4 @@
-// файл контроллеров фильмов.
-const Movie = require('../models/movie');
+const movieSchema = require('../models/movie');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const ForbiddenError = require('../errors/forbidden-error');
@@ -31,11 +30,11 @@ module.exports.createMovie = (request, response, next) => {
   const {
     country, director, duration,
     year, description, image, trailerLink,
-    thumbnail, nameRU, nameEN,
+    thumbnail, movieId, nameRU, nameEN,
   } = request.body; // получим из объекта запроса название и ссылку фильма
   console.log(request.body);
   const owner = request.user._id;
-  return Movie.create({
+  return movieSchema.create({
     country,
     director,
     duration,

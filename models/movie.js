@@ -1,4 +1,3 @@
-// файл схемы и модели карточки
 const mongoose = require('mongoose');
 const isUrl = require('validator/lib/isURL');
 
@@ -28,7 +27,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isUrl(v),
-      message: 'Неправильный формат cсылки',
+      message: 'Неправильный формат ссылки',
     },
   },
   trailerLink: {
@@ -36,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isUrl(v),
-      message: 'Неправильный формат cсылки',
+      message: 'Неправильный формат ссылки',
     },
   },
   thumbnail: {
@@ -44,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => isUrl(v),
-      message: 'Неправильный формат cсылки',
+      message: 'Неправильный формат ссылки',
     },
   },
   owner: {
@@ -67,4 +66,4 @@ const movieSchema = new mongoose.Schema({
 });
 
 // создаём модель и экспортируем её
-module.exports = mongoose.model('movie', movieSchema);
+module.exports = mongoose.model('Movie', movieSchema);

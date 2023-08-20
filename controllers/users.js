@@ -74,7 +74,7 @@ module.exports.getUser = (request, response, next) => {
           data: user,
         });
       }
-      throw new ForbiddenError (`Пользователь по указанному id ${request.user._id} не найден`);
+      throw new ForbiddenError(`Пользователь по указанному id ${request.user._id} не найден`);
     })
     .catch(next);
 };
@@ -103,3 +103,4 @@ module.exports.updateUser = (request, response, next) => User.findByIdAndUpdate(
       next(error); // Для всех остальных ошибок
     }
   });
+  
