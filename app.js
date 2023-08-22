@@ -1,6 +1,5 @@
 require('dotenv').config(); // модуль для загрузки env-переменных в Node.js
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -11,6 +10,8 @@ const errorHandler = require('./middleware/error-handler');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const rateLimiter = require('./middleware/rateLimiter');
 const NotFoundError = require('./errors/not-found-error');
+
+const app = express();
 
 const { PORT = 3001 } = process.env;
 
@@ -60,7 +61,7 @@ app.use((req, res, next) => {
 app.use('/', userRoutes); // запускаем импортированные роуты
 app.use('/', movieRoutes); // запускаем импортированные роуты
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {useNewUrlParser: true })
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', { useNewUrlParser: true })
   .then(() => console.log('Database connected'))
   .catch((err) => console.error(`Database connection error: ${err}`));
 

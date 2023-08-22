@@ -35,7 +35,7 @@ router.post(
 );
 
 router.delete(
-  "/movies/:id",
+  '/movies/:id',
   // валидация
   celebrate({
     params: Joi.object().keys({
