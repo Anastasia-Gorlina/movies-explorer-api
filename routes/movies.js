@@ -26,7 +26,7 @@ router.post(
       image: Joi.string().required().custom(validateURL, 'custom validation'),
       trailerLink: Joi.string().required().custom(validateURL, 'custom validation'),
       thumbnail: Joi.string().required().custom(validateURL, 'custom validation'),
-      movieId: Joi.required(),
+      movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),

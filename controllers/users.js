@@ -20,7 +20,7 @@ module.exports.createUser = (request, response, next) => {
     .then((hash) => User.create({
       name, email, password: hash,
     })) // создадим пользователя на основе пришедших данных
-    .then((user) => response.status(201).send(user))
+    .then((user) => response.status(201).send({ name: user.name, email: user.email }))
     .catch((error) => {
       // console.log(error.name);
       if (error.name === 'ValidationError') {
@@ -50,7 +50,7 @@ module.exports.login = (request, response, next) => {
           secure: true,
           sameSite: 'none', // <-- Выключаем данную опцию
         })
-        .send({ data: user.toJSON() });
+        .send({ name: user.name, email: user.email });
     })
     .catch(next);
 };
@@ -74,7 +74,7 @@ module.exports.getUser = (request, response, next) => {
           data: user,
         });
       }
-      throw new ForbiddenError (`Пользователь по указанному id ${request.user._id} не найден`);
+      throw new ForbiddenError(`Пользователь по указанному id ${request.user._id} не найден`);
     })
     .catch(next);
 };
@@ -96,9 +96,7 @@ module.exports.updateUser = (request, response, next) => User.findByIdAndUpdate(
     if (error.name === 'ValidationError') {
       next(new BadRequestError(`${Object.values(error.errors).map((err) => err.message).join(', ')}`));
     } else if (error.code === 11000) {
-      next(new ConflictError
-        (`Пользователь с таким email - ${request.body.email} уже существует, введите другой email`)
-      );
+      next(new ConflictError(`Пользователь с таким email - ${request.body.email} уже существует, введите другой email`));
     } else {
       next(error); // Для всех остальных ошибок
     }

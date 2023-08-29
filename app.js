@@ -1,8 +1,6 @@
 require('dotenv').config(); // модуль для загрузки env-переменных в Node.js
 const express = require('express');
-
-const app = express();
-const mongoose = require('mongoose'); //+
+const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -12,6 +10,8 @@ const errorHandler = require('./middleware/error-handler');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const rateLimiter = require('./middleware/rateLimiter');
 const NotFoundError = require('./errors/not-found-error');
+
+const app = express();
 
 const { PORT = 3001 } = process.env;
 
@@ -24,11 +24,11 @@ app.use(rateLimiter);
 
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'http://localhost:3001',
-  'http://jet.nomoredomains.work',
-  'https://jet.nomoredomains.work',
-  'http://api.jet.nomoredomains.work',
-  'https://api.jet.nomoredomains.work',
+  '<http://localhost:3001>',
+  '<http://anastasia.gorlina.nomoredomains.co>',
+  '<https://anastasia.gorlina.nomoredomains.co>',
+  '<https://api.anastasia.gorlina.nomoreparties.co>',
+  '<https://api.anastasia.gorlina.nomoredomains.co>',
 ];
 
 // безопасность
@@ -61,7 +61,9 @@ app.use((req, res, next) => {
 app.use('/', userRoutes); // запускаем импортированные роуты
 app.use('/', movieRoutes); // запускаем импортированные роуты
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', { useNewUrlParser: true })
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.error(`Database connection error: ${err}`));
 
 app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
