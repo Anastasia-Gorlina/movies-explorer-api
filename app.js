@@ -24,11 +24,12 @@ app.use(rateLimiter);
 
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  '<http://localhost:3001>',
-  '<http://anastasia.gorlina.nomoredomains.co>',
-  '<https://anastasia.gorlina.nomoredomains.co>',
-  '<https://api.anastasia.gorlina.nomoreparties.co>',
-  '<https://api.anastasia.gorlina.nomoredomains.co>',
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://anastasia.gorlina.nomoredomains.co',
+  'https://anastasia.gorlina.nomoredomains.co',
+  'http://api.anastasia.gorlina.nomoreparties.co',
+  'https://api.anastasia.gorlina.nomoredomains.co',
 ];
 
 // безопасность
