@@ -26,10 +26,10 @@ app.use(rateLimiter);
 const allowedCors = [
   'http://localhost:3000',
   'http://localhost:3001',
-  'http://anastasia.gorlina.nomoredomains.co',
-  'https://anastasia.gorlina.nomoredomains.co',
+  'http://anastasia.gorlina.nomoreparties.co',
+  'https://anastasia.gorlina.nomoreparties.co',
   'http://api.anastasia.gorlina.nomoreparties.co',
-  'https://api.anastasia.gorlina.nomoredomains.co',
+  'https://api.anastasia.gorlina.nomoreparties.co',
 ];
 
 // безопасность
