@@ -52,7 +52,11 @@ app.use((req, res, next) => {
   }
   // Если это предварительный запрос, добавляем нужные заголовки
   if (method === 'OPTIONS') {
-    // разрешаем кросс-доменные запросы любых типов (по умолчанию)
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    // завершаем обработку запроса и возвращаем результат клиенту
+    res.header('Access-Control-Allow-Headers', requestHeaders);
     // завершаем обработку запроса и возвращаем результат клиенту
     res.end();
     return;
