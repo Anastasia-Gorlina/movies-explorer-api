@@ -49,7 +49,7 @@ app.use((req, res, next) => {
   // завершаем обработку запроса и возвращаем результат клиенту
   res.header('Access-Control-Allow-Headers', requestHeaders);
   // завершаем обработку запроса и возвращаем результат клиенту
-  
+  console.log(origin, allowedCors)
   // Если это предварительный запрос, добавляем нужные заголовки
   if (method === 'OPTIONS') {
     res.end();
