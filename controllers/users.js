@@ -36,7 +36,7 @@ module.exports.createUser = (request, response, next) => {
 // login
 module.exports.login = (request, response, next) => {
   const { email, password } = request.body;
-  // console.log(request.body);
+  console.log(request.body);
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // создадим токен
